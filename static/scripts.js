@@ -13,22 +13,22 @@ startBtn.addEventListener('click', function () {
                             <div class="stats">
                                 <div class="stat">
                                     <p>Stat 1<br/>
-                                    <span id="stat1">3</span>/10
+                                    <span id="church">3</span>/10
                                     </p>
                                 </div>
                                 <div class="stat">
                                     <p>Stat 2<br/>
-                                    <span id="stat2">3</span>/10
+                                    <span id="money">3</span>/10
                                     </p>
                                 </div>
                                 <div class="stat">
                                     <p>Stat 3<br/>
-                                    <span id="stat3">3</span>/10
+                                    <span id="king">3</span>/10
                                     </p>
                                 </div>
                                 <div class="stat">
                                     <p>Stat 4<br/>
-                                    <span id="stat4">3</span>/10
+                                    <span id="health">3</span>/10
                                     </p>
                                 </div>
                             </div>
@@ -51,10 +51,10 @@ function startGame() {
     // gets a random card
     let card = cards[Math.floor(Math.random() * cards.length)];
 
-    let stat1 = document.getElementById('stat1');
-    let stat2 = document.getElementById('stat2');
-    let stat3 = document.getElementById('stat3');
-    let stat4 = document.getElementById('stat4');
+    let church = document.getElementById('church');
+    let money = document.getElementById('money');
+    let king = document.getElementById('king');
+    let health = document.getElementById('health');
 
     const option1 = document.getElementById('option1')
     const option2 = document.getElementById('option2')
@@ -66,7 +66,7 @@ function startGame() {
 
     // These two event listeners are almost duplicates of each other, sorry
     option1.addEventListener('click', function (event) {
-        let stats = [stat1, stat2, stat3, stat4];
+        let stats = [church, money, king, health];
         let option = card.options[0];
         impactStats(stats, option);
         // checks if the stats are below minimum or above max thresholds
@@ -80,7 +80,7 @@ function startGame() {
         startGame();
     })
     option2.addEventListener('click', function (event) {
-        let stats = [stat1, stat2, stat3, stat4];
+        let stats = [church, money, king, health];
         let option = card.options[1];
         impactStats(stats, option);
         if (isGameOver(stats) === true) {
@@ -135,16 +135,16 @@ const cards = [
         options: [
             {
                 text: 'test option text 1',
-                impactStat1: 'stat1',
+                impactStat1: 'church',
                 impactValue1: 1,
-                impactStat2: 'stat4',
+                impactStat2: 'health',
                 impactValue2: -1
             },
             {
                 text: 'test option text 2',
-                impactStat1: 'stat1',
+                impactStat1: 'church',
                 impactValue1: -1,
-                impactStat2: 'stat4',
+                impactStat2: 'money',
                 impactValue2: 1
             }
         ]
@@ -155,16 +155,16 @@ const cards = [
         options: [
             {
                 text: 'test option text 3',
-                impactStat1: 'stat3',
+                impactStat1: 'money',
                 impactValue1: 1,
-                impactStat2: 'stat4',
+                impactStat2: 'king',
                 impactValue2: -1
             },
             {
                 text: 'test option text 4',
-                impactStat1: 'stat1',
+                impactStat1: 'king',
                 impactValue1: -1,
-                impactStat2: 'stat2',
+                impactStat2: 'health',
                 impactValue2: 1
             }
         ]
@@ -175,16 +175,16 @@ const cards = [
         options: [
             {
                 text: 'test option text 5',
-                impactStat1: 'stat3',
+                impactStat1: 'health',
                 impactValue1: 1,
-                impactStat2: 'stat1',
+                impactStat2: 'church',
                 impactValue2: -1
             },
             {
                 text: 'test option text 6',
-                impactStat1: 'stat1',
+                impactStat1: 'king',
                 impactValue1: -1,
-                impactStat2: 'stat2',
+                impactStat2: 'church',
                 impactValue2: 1
             }
         ]
@@ -195,16 +195,16 @@ const cards = [
         options: [
             {
                 text: 'test option text 1',
-                impactStat1: 'stat1',
+                impactStat1: 'church',
                 impactValue1: 1,
-                impactStat2: 'stat4',
+                impactStat2: 'money',
                 impactValue2: -1
             },
             {
                 text: 'test option text 4444',
-                impactStat1: 'stat1',
+                impactStat1: 'king',
                 impactValue1: -1,
-                impactStat2: 'stat4',
+                impactStat2: 'church',
                 impactValue2: 1
             }
         ]
@@ -215,16 +215,16 @@ const cards = [
         options: [
             {
                 text: 'test option text 1111',
-                impactStat1: 'stat1',
+                impactStat1: 'money',
                 impactValue1: 1,
-                impactStat2: 'stat4',
+                impactStat2: 'health',
                 impactValue2: -1
             },
             {
                 text: 'test option text 2332',
-                impactStat1: 'stat1',
+                impactStat1: 'king',
                 impactValue1: -1,
-                impactStat2: 'stat4',
+                impactStat2: 'money',
                 impactValue2: 1
             }
         ]
@@ -235,16 +235,16 @@ const cards = [
         options: [
             {
                 text: 'test option text 62',
-                impactStat1: 'stat1',
+                impactStat1: 'church',
                 impactValue1: 1,
-                impactStat2: 'stat4',
+                impactStat2: 'money',
                 impactValue2: -1
             },
             {
                 text: 'test option text 212',
-                impactStat1: 'stat1',
+                impactStat1: 'health',
                 impactValue1: -1,
-                impactStat2: 'stat4',
+                impactStat2: 'king',
                 impactValue2: 1
             }
         ]
