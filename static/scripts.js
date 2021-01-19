@@ -74,7 +74,7 @@ function startGame() {
             // nothing actually happens yet
             console.log('GAME OVER')
         }
-        // removes the event listener in each round, else all hell brakes loose
+        // removes the event listener in each round, else all hell breaks loose
         this.removeEventListener('click',arguments.callee,false);
         //load a new round
         startGame();
