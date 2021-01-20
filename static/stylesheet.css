@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 *, *::before, *::after {
     box-sizing: border-box;
-    font-family: "Helvetica Neue", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -59,7 +61,7 @@ body {
 }
 
 .animated-word {
-    font-family: Helvetica, serif;
+    font-family: "Roboto", serif;
     letter-spacing: 0.4em;
     font-weight: 600;
     font-size: 100px;
@@ -77,4 +79,14 @@ body {
     color: rgb(124, 88, 177);
     outline-color: rgba(71, 126, 232, 0);
     outline-offset: 300px;
+}
+button:hover{
+    background-color: rgba(174,166,175,0.43);
+}
+button {
+    border-radius: 8px;
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+    color: #343434;
+
 }
