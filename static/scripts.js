@@ -16,7 +16,10 @@ function makeContainer() {
     container.classList.add('container');
     scoreContainer.innerHTML = `<p><span id="score">0</span> years lived</p>`
     // inserts a mock card
+    let audio = musicMaterial[Math.floor(Math.random() * cards.length)];
+    console.log(audio)
     let cardToInsert = `
+                            <audio id="foobar" src="${audio}" preload="auto"></audio>
                             <div class="stats">
                                 <div class="stat">
                                     <p>
@@ -55,6 +58,8 @@ function makeContainer() {
     const restartBtn = `<button class="restart" onclick="restartGame()">Restart</button>`;
     container.insertAdjacentHTML('afterend', restartBtn);
 
+    let backgroundMusic = document.getElementById("foobar");
+    backgroundMusic.play();
 
     startGame();
 }
@@ -697,3 +702,8 @@ const endings = [
         ]
     },
 ]
+
+
+const musicMaterial = ["/static/music/music1.mp3", "/static/music/music2.mp3", "/static/music/music3.mp3", "/static/music/music4.mp3",
+                        "/static/music/music5.mp3", "/static/music/music6.mp3", "/static/music/music7.mp3", "/static/music/music8.mp3",
+                        "/static/music/music9.mp3", "/static/music/music10.mp3", "/static/music/music11.mp3", "/static/music/music12.mp3"]

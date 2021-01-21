@@ -117,3 +117,5 @@ body {
     bottom: 3%;
     left: 47%;
 }
+
+#foobar { display: none }
