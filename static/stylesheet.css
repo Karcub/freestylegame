@@ -139,11 +139,29 @@ button {
     background-image:    url(images/gameover.png);
 }
 
-#meter {border:1px solid #000;width:50px}
+#health-progress {border:2px solid #050505;width:76px; border-radius: 5px;}
+#king-progress {border:2px solid #050505;width:76px; border-radius: 5px;}
+#money-progress {border:2px solid #050505;width:76px; border-radius: 5px;}
+#church-progress {border:2px solid #050505;width:76px; border-radius: 5px;}
 #church {background:#333;height:10px;width:50%}
 #king {background:#333;height:10px;width:50%}
 #money {background:#333;height:10px;width:50%}
 #health {background:#333;height:10px;width:50%}
+
+.score-container {
+    position: fixed;
+    top: 0%;
+    left: 47%;
+    color: white;
+}
+
+.restart {
+    position: fixed;
+    bottom: 3%;
+    left: 47%;
+}
+
+#foobar { display: none }
 
 @keyframes yay {
   from {

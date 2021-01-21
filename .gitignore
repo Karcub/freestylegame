@@ -1,0 +1,28 @@
+/env/
+
+# Do not track shell scripts (local vars)
+*.sh
+
+# Temporary folder
+/temp/
+
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# pyenv
+.python-version
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Visual Studio files
+/.vscode/
+
+# IntelliJ
+/.idea/
+
+
