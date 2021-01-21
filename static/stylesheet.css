@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
 }
+
 body {
     padding: 0;
     margin: 0;
@@ -15,9 +16,15 @@ body {
     height: 100vh;
 
 }
+
 .background {
     background-image: url("img/bg2.png");
     background-color: #343434;
+}
+
+.option-buttons {
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
@@ -30,6 +37,9 @@ body {
     padding-top: 0;
     border-radius: 5px;
     box-shadow: 7px 5px 14px 9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 #text {
@@ -39,12 +49,24 @@ body {
 
 .btn-right {
     float: right;
+    width: 200px;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.btn-left {
+    width: 200px;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .btn {
     display: inline-flex;
     padding: 5px;
-    margin: 10px;
 }
 
 .stat {
@@ -87,9 +109,11 @@ body {
     outline-color: rgba(71, 126, 232, 0);
     outline-offset: 300px;
 }
-button:hover{
+
+button:hover {
     background-color: rgba(84, 92, 104, 0.43);
 }
+
 button {
     border-radius: 8px;
     font-family: Roboto, sans-serif;
@@ -107,46 +131,87 @@ button {
 
 .character-card {
     width: 430px;
-    height: 290px;
-    background-image:    url(images/user.png);
-    background-size:     cover;
-    background-repeat:   no-repeat;
+    height: 250px;
+    background-image: url(images/user.png);
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center center;
     transform-origin: 50% 99%;
+    border-radius: 10px;
+    margin-top: 5px;
 }
 
 .user-card {
-    background-image:    url(images/user.png);
+    background-image: url(images/user.png);
 }
 
 .church-card {
-    background-image:    url(images/church.png);
+    background-image: url(images/church.png);
 }
 
 .money-card {
-    background-image:    url(images/money.png);
+    background-image: url(images/money.png);
 }
 
 .king-card {
-    background-image:    url(images/king.png);
+    background-image: url(images/king.png);
 }
 
 .health-card {
-    background-image:    url(images/health.png);
+    background-image: url(images/health.png);
 }
 
 .gameover-card {
-    background-image:    url(images/gameover.png);
+    background-image: url(images/gameover.png);
 }
 
-#health-progress {border:2px solid #050505;width:76px; border-radius: 5px;}
-#king-progress {border:2px solid #050505;width:76px; border-radius: 5px;}
-#money-progress {border:2px solid #050505;width:76px; border-radius: 5px;}
-#church-progress {border:2px solid #050505;width:76px; border-radius: 5px;}
-#church {background:#333;height:10px;width:50%}
-#king {background:#333;height:10px;width:50%}
-#money {background:#333;height:10px;width:50%}
-#health {background:#333;height:10px;width:50%}
+#health-progress {
+    border: 2px solid #050505;
+    width: 76px;
+    border-radius: 5px;
+}
+
+#king-progress {
+    border: 2px solid #050505;
+    width: 76px;
+    border-radius: 5px;
+}
+
+#money-progress {
+    border: 2px solid #050505;
+    width: 76px;
+    border-radius: 5px;
+}
+
+#church-progress {
+    border: 2px solid #050505;
+    width: 76px;
+    border-radius: 5px;
+}
+
+#church {
+    background: #333;
+    height: 10px;
+    width: 50%
+}
+
+#king {
+    background: #333;
+    height: 10px;
+    width: 50%
+}
+
+#money {
+    background: #333;
+    height: 10px;
+    width: 50%
+}
+
+#health {
+    background: #333;
+    height: 10px;
+    width: 50%
+}
 
 .score-container {
     position: fixed;
@@ -161,33 +226,37 @@ button {
     left: 47%;
 }
 
-#foobar { display: none }
+#foobar {
+    display: none
+}
 
 @keyframes yay {
-  from {
-    transform: rotate(0deg);
-    opacity: 1;
-  }
-  to {
-    transform: rotate(40deg) translateY(-80px);
-    opacity: 0;
-  }
+    from {
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+    to {
+        transform: rotate(40deg) translateY(-80px);
+        opacity: 0;
+    }
 }
 
 @keyframes nope {
-  from {
-    transform: rotate(0deg);
-    opacity: 1;
-  }
-  to {
-    transform: rotate(-40deg) translateY(-80px);
-    opacity: 0;
-  }
+    from {
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+    to {
+        transform: rotate(-40deg) translateY(-80px);
+        opacity: 0;
+    }
 }
 
 .character-card-yay {
-  animation: yay 1s ease-out;
+    animation: yay 1s ease-out;
 }
+
 .character-card-nope {
-  animation: nope 1s ease-out;
+    animation: nope 1s ease-out;
 }
+

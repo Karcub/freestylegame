@@ -47,11 +47,12 @@ function makeContainer() {
                                 </div>
                             </div>
                             <div id="text">Text</div>
-                            <div id="option-buttons">
+                            <div class="button-container">
                                 <button class="btn btn-left" value="1" id="option1">Option 1</button>
                                 <button class="btn btn-right" value="2" id="option2">Option 2</button>
-                                <div id="char-card" class="character-card"></div>
                             </div>
+                            <div id="char-card" class="character-card"></div>
+                            
                              `;
 
     container.insertAdjacentHTML('afterbegin', cardToInsert);
