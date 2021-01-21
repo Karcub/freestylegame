@@ -140,6 +140,7 @@ button {
     transform-origin: 50% 99%;
     border: 2px solid #384553;
     margin-top: 5px;
+    border-radius: 8px;
 }
 
 .user-card {
