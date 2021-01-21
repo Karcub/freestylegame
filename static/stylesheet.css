@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
 }
+
 body {
     padding: 0;
     margin: 0;
@@ -15,9 +16,15 @@ body {
     height: 100vh;
 
 }
+
 .background {
     background-image: url("img/bg2.png");
     background-color: #343434;
+}
+
+.option-buttons {
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
@@ -30,6 +37,9 @@ body {
     padding-top: 0;
     border-radius: 5px;
     box-shadow: 7px 5px 14px 9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 #text {
@@ -39,12 +49,24 @@ body {
 
 .btn-right {
     float: right;
+    width: 200px;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.btn-left {
+    width: 200px;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .btn {
     display: inline-flex;
     padding: 5px;
-    margin: 10px;
 }
 
 .stat {
@@ -87,16 +109,17 @@ body {
     outline-color: rgba(71, 126, 232, 0);
     outline-offset: 300px;
 }
-button:hover{
+
+button:hover {
     background-color: rgba(84, 92, 104, 0.43);
 }
+
 button {
     border-radius: 8px;
     font-family: Roboto, sans-serif;
-    /*font-weight: bold;*/
+    font-weight: bold;
     background-color: #545c68;
     color: white;
-    font-style: italic;
 
 }
 
@@ -114,6 +137,8 @@ button {
     background-repeat:   no-repeat;
     background-position: center center;
     transform-origin: 50% 99%;
+    /*border-radius: 10px;*/
+    /*margin-top: 5px;*/
 }
 
 .user-card {
@@ -140,14 +165,53 @@ button {
     background-image:    url(images/gameoverr.png);
 }
 
-#health-progress {border:2px solid #050505;width:76px; border-radius: 5px;}
-#king-progress {border:2px solid #050505;width:76px; border-radius: 5px;}
-#money-progress {border:2px solid #050505;width:76px; border-radius: 5px;}
-#church-progress {border:2px solid #050505;width:76px; border-radius: 5px;}
-#church {background:#333;height:10px;width:50%}
-#king {background:#333;height:10px;width:50%}
-#money {background:#333;height:10px;width:50%}
-#health {background:#333;height:10px;width:50%}
+#health-progress {
+    border: 2px solid #050505;
+    width: 76px;
+    border-radius: 5px;
+}
+
+#king-progress {
+    border: 2px solid #050505;
+    width: 76px;
+    border-radius: 5px;
+}
+
+#money-progress {
+    border: 2px solid #050505;
+    width: 76px;
+    border-radius: 5px;
+}
+
+#church-progress {
+    border: 2px solid #050505;
+    width: 76px;
+    border-radius: 5px;
+}
+
+#church {
+    background: #333;
+    height: 10px;
+    width: 50%
+}
+
+#king {
+    background: #333;
+    height: 10px;
+    width: 50%
+}
+
+#money {
+    background: #333;
+    height: 10px;
+    width: 50%
+}
+
+#health {
+    background: #333;
+    height: 10px;
+    width: 50%
+}
 
 .score-container {
     position: fixed;
@@ -162,70 +226,36 @@ button {
     left: 47%;
 }
 
-#foobar { display: none }
+#foobar {
+    display: none
+}
 
 @keyframes yay {
-  from {
-    transform: rotate(0deg);
-    opacity: 1;
-  }
-  to {
-    transform: rotate(40deg) translateY(-80px);
-    opacity: 0;
-  }
+    from {
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+    to {
+        transform: rotate(40deg) translateY(-80px);
+        opacity: 0;
+    }
 }
 
 @keyframes nope {
-  from {
-    transform: rotate(0deg);
-    opacity: 1;
-  }
-  to {
-    transform: rotate(-40deg) translateY(-80px);
-    opacity: 0;
-  }
+    from {
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+    to {
+        transform: rotate(-40deg) translateY(-80px);
+        opacity: 0;
+    }
 }
 
 .character-card-yay {
-  animation: yay 1s ease-out;
+    animation: yay 1s ease-out;
 }
+
 .character-card-nope {
-  animation: nope 1s ease-out;
-}
-
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+    animation: nope 1s ease-out;
 }
