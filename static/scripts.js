@@ -53,20 +53,10 @@ function makeContainer() {
                             <div id="char-card" class="character-card"></div>
                             
                              `;
-    let extraAdd = `
-                    <div id="myModal" class="modal">
-                    
-                      <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <p>Some text in the Modal..</p>
-                      </div>
-                    
-                    </div>`
 
     container.insertAdjacentHTML('afterbegin', cardToInsert);
     const restartBtn = `<button class="restart" onclick="restartGame()">Restart</button>`;
     container.insertAdjacentHTML('afterend', restartBtn);
-    container.insertAdjacentHTML('afterend', extraAdd);
 
     let backgroundMusic = document.getElementById("foobar");
     backgroundMusic.play();
