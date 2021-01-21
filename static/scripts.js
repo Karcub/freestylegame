@@ -2,40 +2,43 @@ const startBtn = document.getElementById('start');
 
 startBtn.addEventListener('click', function () {
     startBtn.remove();
+    makeContainer();
+})
 
-    // the card itself
+
+function makeContainer() {
     const container = document.createElement('div');
+    const scoreContainer = document.createElement('div');
+    document.body.appendChild(scoreContainer);
     document.body.appendChild(container);
-    container.classList.add('container');
 
+    scoreContainer.classList.add('score-container');
+    container.classList.add('container');
+    scoreContainer.innerHTML = `<p><span id="score">0</span> years lived</p>`
     // inserts a mock card
     let cardToInsert = `
                             <div class="stats">
                                 <div class="stat">
                                     <p>
                                     <img src="/static/images/church1-stat.png" class="stat-symbol"><br />
-<!--                                    <span id="church">3</span>/10-->
                                     <div id='church-progress'><div data-value="50" id='church'></div></div>
                                     </p>
                                 </div>
                                 <div class="stat">
                                     <p>
                                     <img src="/static/images/money1-stat.png" class="stat-symbol"><br />
-<!--                                    <span id="money">3</span>/10-->
                                     <div id='money-progress'><div data-value="50" id='money'></div></div>
                                     </p>
                                 </div>
                                 <div class="stat">
                                     <p>
                                     <img src="/static/images/king-stat.png" class="stat-symbol"><br />
-<!--                                    <span id="king">3</span>/10-->
                                     <div id='king-progress'><div data-value="50" id='king'></div></div>
                                     </p>
                                 </div>
                                 <div class="stat">
                                     <p>
                                     <img src="/static/images/health-stat.png" class="stat-symbol"><br />
-<!--                                    <span id="health">3</span>/10-->
                                     <div id='health-progress'><div data-value="50" id='health'></div></div>
                                     </p>
                                 </div>
@@ -49,9 +52,12 @@ startBtn.addEventListener('click', function () {
                              `;
 
     container.insertAdjacentHTML('afterbegin', cardToInsert);
+    const restartBtn = `<button class="restart" onclick="restartGame()">Restart</button>`;
+    container.insertAdjacentHTML('afterend', restartBtn);
+
 
     startGame();
-})
+}
 
 
 function startGame() {
@@ -73,6 +79,8 @@ function startGame() {
     // let stats = [church, money, king, health];
 
     cardText.innerText = card.text;
+
+    let score = document.getElementById('score');
 
     // if (isHealthLow(stats) === false) {
     //     option1.innerText = card.options[0].text;
@@ -111,8 +119,11 @@ function startGame() {
                 cardText.innerText = chooseEnding(stats);
                 characterCard.className = 'character-card';
                 characterCard.classList.add(`gameover-card`);
+
             }
             else {
+                let addScore = parseInt(score.innerText) + 1;
+                score.innerText = addScore.toString();
                 // loads a new card if the stats don't indicate game over
                 startGame();
             }
@@ -135,9 +146,12 @@ function startGame() {
                 cardText.innerText = chooseEnding(stats);
                 characterCard.className = 'character-card';
                 characterCard.classList.add(`gameover-card`);
+
             }
             else {
-              startGame();
+                let addScore = parseInt(score.innerText) + 1;
+                score.innerText = addScore.toString();
+                startGame();
             }
         }
         else {
@@ -148,24 +162,49 @@ function startGame() {
 }
 
 
+function restartGame() {
+    let container = document.getElementsByClassName('container');
+    document.body.innerHTML = '';
+    makeContainer();
+}
+
+
 function impactStats(stats, option) {
-    // let value = 0
-    // progress = document.getElementById("progress");
-    // adds the corresponding impact values to the stats
     for (let stat of stats) {
         for (let impact of option.impacts)
            if (impact.impactStat === stat.id) {
-            // let stat1Value = parseInt(stat.innerText);
-            // let sum = stat1Value + parseInt(option.impactValue1);
-            // stat.innerText = sum.toString();
-            // value = sum;
-               console.log(impact.impactStat)
-               let statValue = parseInt(stat.dataset.value);
-               statValue += parseInt(impact.impactValue);
-               console.log(statValue)
-                if (statValue >= 100) statValue = 100;
-                if (statValue <= 0) statValue = 0;
-                stat.style.width = statValue  + "%";
+                let statValue = parseInt(stat.dataset.value);
+                if (impact.impactOperator === 'positive') {
+                    let sum = statValue + parseInt(impact.impactValue);
+                    if (sum >= 100) sum = 100;
+                    stat.setAttribute('data-value', sum);
+                    stat.style.width = sum  + "%";
+                    if (sum >= 80) {
+                        stat.style.background = '#37ff00';
+                    }
+                    else if (sum <= 20) {
+                        stat.style.background = '#ff0000';
+                    }
+                    else {
+                        stat.style.background = '#333';
+                    }
+                }
+                else if (impact.impactOperator === 'negative') {
+                    let sum = statValue - parseInt(impact.impactValue);
+                    if (sum <= 0) sum = 0;
+                    stat.setAttribute('data-value', sum);
+                    stat.style.width = sum  + "%";
+                    if (sum >= 80) {
+                        stat.style.background = '#37ff00';
+                    }
+                    else if (sum <= 20) {
+                        stat.style.background = '#ff0000';
+                    }
+                    else {
+                        stat.style.background = '#333';
+                    }
+                }
+
             }
     }
 }
@@ -177,8 +216,8 @@ function isGameOver(stats) {
     // up for debate
     const upperLimit = 100;
     for (let stat of stats) {
-        //rewrite
-        if ((parseInt(stat.innerText) <= lowerLimit) || (parseInt(stat.innerText) >= upperLimit)) {
+        let statValue = parseInt(stat.dataset.value);
+        if ((statValue <= lowerLimit) || (statValue >= upperLimit)) {
             gameOver = true
         }
     }
@@ -213,8 +252,8 @@ function chooseEnding(stats) {
     const lowerLimit = 0;
     const upperLimit = 100;
     for (let stat of stats) {
-        // REWRITE DATASET
-        if (parseInt(stat.innerText) <= lowerLimit) {
+        let statValue = parseInt(stat.dataset.value);
+        if (statValue <= lowerLimit) {
             let threshold = 'lower';
             let gameOverStat = stat.id;
             for (let ending of endings) {
@@ -224,7 +263,7 @@ function chooseEnding(stats) {
                 }
             }
         }
-        else if (parseInt(stat.innerText) >= upperLimit) {
+        else if (statValue >= upperLimit) {
             let threshold = 'upper';
             let gameOverStat = stat.id;
             for (let ending of endings) {
@@ -612,7 +651,8 @@ const endings = [
                     "The king is bored with them, so you were sentenced to the guillotine.",
             },
             {
-                text: 'church upperbbbbbbbbbbbb',
+                text: "Seeing the archbishop's special treatment of you, your fellow musicians wanted to teach you a lesson." +
+                    "While running away, you slipped and died on the spot.",
             }
         ]
     },
@@ -625,8 +665,8 @@ const endings = [
                     'You reputation hit rock bottom.',
             },
             {
-                text: "Seeing the king's special treatment of you, your fellow musicians wanted to teach you a lesson." +
-                    "While running away, you slipped and died on the spot.",
+                text: "Your relationship with the king -and his queen is truly just too good." +
+                    " The king caught the two of you in the act and the queen pushed all the blame to you. You were hanged the next morning.",
             }
         ]
     },
@@ -651,7 +691,8 @@ const endings = [
                 text: 'You accumulated a lot of riches over time, so the king decided to "liberate" your from all your assets.',
             },
             {
-                text: 'money upperiiiiiiiii',
+                text: "Your eldest son couldn't wait for your death to get his inheritance, " +
+                    "so he decided to take action a bit earlier and poisoned you.",
             }
         ]
     },
