@@ -286,267 +286,93 @@ const cards = [
     // the whole point of the game is to balance the stats longer
     // the impacts of these options to the stats shouldn't be too high else te game will end in seconds
     {
-        id: 1,
         theme: 'church',
-        text: 'test situation text 1 church',
+        text: "You’re playing a gig and you’re performing a lot of rebellious tracks, but the archbishop shows up.",
         options: [
             {
-                text: 'test option text 1',
+                text: "Continue like nothing happened",
                 impacts: [
                     {
                         impactStat: 'church',
-                        impactOperator: 'positive',
+                        impactOperator: 'negative',
                         impactValue: 10,
                     },
                     {
-
-                        impactStat: 'health',
-                        impactOperator: 'negative',
-                        impactValue: 10
-                    },
-                    {
-
-                        impactStat: 'king',
+                        impactStat: 'money',
                         impactOperator: 'positive',
                         impactValue: 10
                     }
                 ]
             },
             {
-                text: 'test option text 2',
+                text: 'Start playing some nice church music',
                 impacts: [
                     {
                         impactStat: 'church',
-                        impactOperator: 'negative',
-                        impactValue: 10,
-                    },
-                    {
-
-                        impactStat: 'health',
                         impactOperator: 'positive',
                         impactValue: 10,
-                    },
-                    {
-
-                        impactStat: 'money',
-                        impactOperator: 'positive',
-                        impactValue: 10
                     }
                 ]
             }
         ]
     },
     {
-        id: 2,
-        theme: 'king',
-        text: 'test situation text 2 kingking',
+        theme: 'church',
+        text: 'You suddenly feel an urge to go find a priest and confess your sins.',
         options: [
             {
-                text: 'test option text 3',
+                text: 'Where was the church again?',
                 impacts: [
                     {
-                        impactStat: 'money',
-                        impactOperator: 'positive',
-                        impactValue: 10,
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 20,
                     },
                     {
-
                         impactStat: 'health',
                         impactOperator: 'positive',
                         impactValue: 10,
-                    },
-                    {
-
-                        impactStat: 'king',
-                        impactOperator: 'negative',
-                        impactValue: 10
                     }
                 ],
             },
             {
-                text: 'test option 4',
+                text: 'Take the whole family',
                 impacts: [
                     {
-                        impactStat: 'money',
-                        impactOperator: 'negative',
-                        impactValue: 10,
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 20,
                     },
                     {
-
                         impactStat: 'health',
                         impactOperator: 'negative',
                         impactValue: 10,
-                    },
-                    {
-
-                        impactStat: 'king',
-                        impactOperator: 'negative',
-                        impactValue: 10
                     }
                 ]
             }
         ]
     },
     {
-        id: 3,
-        theme: 'church',
-        text: 'test situation text 3 churchchurch',
-        options: [
-            {
-                text: 'test option text 5',
-                impacts: [
-                    {
-                        impactStat: 'church',
-                        impactOperator: 'positive',
-                        impactValue: 10,
-                    },
-                    {
-
-                        impactStat: 'health',
-                        impactOperator: 'negative',
-                        impactValue: 10
-                    },
-                    {
-
-                        impactStat: 'king',
-                        impactOperator: 'positive',
-                        impactValue: 10
-                    }
-                ]
-            },
-            {
-                text: 'test option text 6',
-                impacts: [
-                    {
-                        impactStat: 'church',
-                        impactOperator: 'negative',
-                        impactValue: 10,
-                    },
-                    {
-
-                        impactStat: 'health',
-                        impactOperator: 'negative',
-                        impactValue: 10
-                    },
-                    {
-
-                        impactStat: 'king',
-                        impactOperator: 'positive',
-                        impactValue: 10
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        id: 4,
-        theme: 'money',
-        text: 'test situation text 1 moneymoney',
-        options: [
-            {
-                text: 'test option text 7',
-                impacts: [
-                    {
-                        impactStat: 'money',
-                        impactOperator: 'negative',
-                        impactValue: 10,
-                    },
-                    {
-
-                        impactStat: 'health',
-                        impactOperator: 'positive',
-                        impactValue: 10
-                    },
-                    {
-
-                        impactStat: 'king',
-                        impactOperator: 'negative',
-                        impactValue: 10
-                    }
-                ]
-            },
-            {
-                text: 'test option text 8',
-                impacts: [
-                    {
-                        impactStat: 'money',
-                        impactOperator: 'positive',
-                        impactValue: 10,
-                    },
-                    {
-
-                        impactStat: 'health',
-                        impactOperator: 'negative',
-                        impactValue: 10
-                    },
-                    {
-
-                        impactStat: 'king',
-                        impactOperator: 'positive',
-                        impactValue: 10
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        id: 5,
-        theme: 'health',
-        text: 'test situation text 5 healthhealth',
-        options: [
-            {
-                text: 'test option text 1111',
-                impacts: [
-                    {
-                        impactStat: 'church',
-                        impactOperator: 'negative',
-                        impactValue: 10,
-                    },
-                    {
-
-                        impactStat: 'health',
-                        impactOperator: 'positive',
-                        impactValue: 10
-                    },
-                    {
-
-                        impactStat: 'money',
-                        impactOperator: 'negative',
-                        impactValue: 10
-                    }
-                ]
-            },
-            {
-                text: 'test option text 10',
-                impacts: [
-                    {
-                        impactStat: 'church',
-                        impactOperator: 'negative',
-                        impactValue: 10,
-                    },
-                    {
-
-                        impactStat: 'health',
-                        impactOperator: 'negative',
-                        impactValue: 10
-                    },
-                    {
-
-                        impactStat: 'king',
-                        impactOperator: 'negative',
-                        impactValue: 10
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        id: 6,
         theme: 'king',
-        text: 'test situation text 6 kingking',
+        text: 'Your King seems to have set his interests upon a daughter of yours.',
         options: [
             {
-                text: 'test option text 62',
+                text: 'One less mouth to feed',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    }
+                ]
+            },
+            {
+                text: 'Shameless old pig!',
                 impacts: [
                     {
                         impactStat: 'church',
@@ -554,13 +380,187 @@ const cards = [
                         impactValue: 10,
                     },
                     {
-
+                        impactStat: 'king',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'church',
+        text: "My son, I haven’t seen you at my sermons lately.",
+        options: [
+            {
+                text: "Don’t feel like it ",
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 20,
+                    }
+                ]
+            },
+            {
+                text: "I’m repenting, Father",
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 20,
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'user',
+        text: "Your lute tunes seem to have channelled Hell’s frequencies " +
+            "and summoned the Great Goat Devil, Baphomet. He likes your music, so he offers his help.",
+        options: [
+            {
+                text: 'Call an exorcist!',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'negative',
+                        impactValue: 10
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'negative',
+                        impactValue: 10
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 10
+                    }
+                ]
+            },
+            {
+                text: 'Why, thanks',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    },
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    },
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'money',
+        text: "You ran out of chickens at the farmer’s market and there’s still a line at your little stand but your back hurts like hell.",
+        options: [
+            {
+                text: 'Go home and come back with another batch of chickens',
+                impacts: [
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'negative',
+                        impactValue: 10
+                    }
+                ]
+            },
+            {
+                text: 'Just go home and rest',
+                impacts: [
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'king',
+        text: "The king is in your village for a visit. Everyone is excited and wants to throw a celebration.\n",
+        options: [
+            {
+                text: 'Join and contribute, celebrate you king! ',
+                impacts: [
+                    {
                         impactStat: 'money',
                         impactOperator: 'negative',
                         impactValue: 10
                     },
                     {
-
+                        impactStat: 'king',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    }
+                ]
+            },
+            {
+                text: 'Hide and start to dream about regicide',
+                impacts: [
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    },
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'user',
+        text: "A knight -whom you squire for- entered a tournament, but suddenly dies.",
+        options: [
+            {
+                text: "Finally, let’s pull ‘A knight's tale’, let’s win this thing",
+                impacts: [
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    },
+                    {
                         impactStat: 'king',
                         impactOperator: 'negative',
                         impactValue: 10
@@ -568,7 +568,38 @@ const cards = [
                 ]
             },
             {
-                text: 'test option text 1022',
+                text: 'Report the death of your master',
+                impacts: [
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'money',
+        text: "The wheat crops are having a hard time since the drought, you have to take action.",
+        options: [
+            {
+                text: 'Do a pagan rain dance which has 100% rate of success',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    }
+                ]
+            },
+            {
+                text: 'Just pray to your simple god and hope for the best',
                 impacts: [
                     {
                         impactStat: 'church',
@@ -576,16 +607,272 @@ const cards = [
                         impactValue: 10,
                     },
                     {
-
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 10
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'king',
+        text: "Your band is just about to perform on the King’s birthday feast, but you noticed that your lute is off-key, it needs a restring.",
+        options: [
+            {
+                text: 'Get someone who can do it ASAP',
+                impacts: [
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    },
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'positive',
+                        impactValue: 20
+                    }
+                ]
+            },
+            {
+                text: 'Play as if nothing is wrong',
+                impacts: [
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'negative',
+                        impactValue: 20,
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'user',
+        text: "Suddenly you see a huge black cat crossing your path, but with any more delay, " +
+            "you will be late from the king’s birthday, where you have to perform.",
+        options: [
+            {
+                text: 'Say a quick prayer and continue forward',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 10
+                    },
+                    {
                         impactStat: 'health',
                         impactOperator: 'negative',
                         impactValue: 10
                     },
                     {
-
                         impactStat: 'king',
                         impactOperator: 'positive',
                         impactValue: 10
+                    }
+                ]
+            },
+            {
+                text: 'Turn around and rush back home',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    },
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'negative',
+                        impactValue: 10
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'health',
+        text: "Your spouse is having plague-like symptoms.",
+        options: [
+            {
+                text: "Let’s get the plague doctor",
+                impacts: [
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 10
+                    }
+                ]
+            },
+            {
+                text: "Pray like there’s no tomorrow [because your spouse might not have one]",
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'negative',
+                        impactValue: 10
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'money',
+        text: "Your dried salted meat supplies are decreasing.\n",
+        options: [
+            {
+                text: 'Convert to veganism',
+                impacts: [
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            },
+            {
+                text: 'Sell some of your children to a nice man with a fez',
+                impacts: [
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 30,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'user',
+        text: "Your daughter shows you her mathematics skills.",
+        options: [
+            {
+                text: 'Give it to a great school',
+                impacts: [
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            },
+            {
+                text: 'Ask your priest about witchcraft',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'user',
+        text: "Your private parts are burning after a mysterious night out.",
+        options: [
+            {
+                text: 'Go to the doctor, he might have some medicine for medieval STDs',
+                impacts: [
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            },
+            {
+                text: "Just confess, there’s nothing you can do",
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'church',
+        text: "One of your vocalists sang God’s name with bad emphasis on your concert in your local church.",
+        options: [
+            {
+                text: 'Blackmail him for playing free',
+                impacts: [
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 20
+                    }
+                ]
+            },
+            {
+                text: "Do nothing, pretend it didn't happen",
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 20,
                     }
                 ]
             }
