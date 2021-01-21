@@ -57,3 +57,47 @@ body {
     display: table-cell;
     vertical-align: center;
 }
+
+.stat-symbol {
+    width: 50px;
+    height: 50px;
+}
+
+.character-card {
+    width: 430px;
+    height: 290px;
+    background-image:    url(images/user.png);
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
+
+.user-card {
+    background-image:    url(images/user.png);
+}
+
+.church-card {
+    background-image:    url(images/church.png);
+}
+
+.money-card {
+    background-image:    url(images/money.png);
+}
+
+.king-card {
+    background-image:    url(images/king.png);
+}
+
+.health-card {
+    background-image:    url(images/health.png);
+}
+
+.gameover-card {
+    background-image:    url(images/gameover.png);
+}
+
+#meter {border:1px solid #000;width:50px}
+#church {background:#333;height:10px;width:50%}
+#king {background:#333;height:10px;width:50%}
+#money {background:#333;height:10px;width:50%}
+#health {background:#333;height:10px;width:50%}
