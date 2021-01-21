@@ -93,9 +93,10 @@ button:hover{
 button {
     border-radius: 8px;
     font-family: Roboto, sans-serif;
-    font-weight: bold;
+    /*font-weight: bold;*/
     background-color: #545c68;
     color: white;
+    font-style: italic;
 
 }
 
@@ -107,8 +108,8 @@ button {
 
 .character-card {
     width: 430px;
-    height: 290px;
-    background-image:    url(images/user.png);
+    height: 270px;
+    background-image:    url(images/userr.png);
     background-size:     cover;
     background-repeat:   no-repeat;
     background-position: center center;
@@ -116,27 +117,27 @@ button {
 }
 
 .user-card {
-    background-image:    url(images/user.png);
+    background-image:    url(images/userr.png);
 }
 
 .church-card {
-    background-image:    url(images/church.png);
+    background-image:    url(images/churchhh.png);
 }
 
 .money-card {
-    background-image:    url(images/money.png);
+    background-image:    url(images/moneyy.png);
 }
 
 .king-card {
-    background-image:    url(images/king.png);
+    background-image:    url(images/kingg.png);
 }
 
 .health-card {
-    background-image:    url(images/health.png);
+    background-image:    url(images/healthh.png);
 }
 
 .gameover-card {
-    background-image:    url(images/gameover.png);
+    background-image:    url(images/gameoverr.png);
 }
 
 #health-progress {border:2px solid #050505;width:76px; border-radius: 5px;}
@@ -190,4 +191,41 @@ button {
 }
 .character-card-nope {
   animation: nope 1s ease-out;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }

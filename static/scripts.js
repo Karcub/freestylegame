@@ -16,8 +16,7 @@ function makeContainer() {
     container.classList.add('container');
     scoreContainer.innerHTML = `<p><span id="score">0</span> years lived</p>`
     // inserts a mock card
-    let audio = musicMaterial[Math.floor(Math.random() * cards.length)];
-    console.log(audio)
+    let audio = musicMaterial[Math.floor(Math.random() * musicMaterial.length)];
     let cardToInsert = `
                             <audio id="foobar" src="${audio}" preload="auto"></audio>
                             <div class="stats">
@@ -53,13 +52,24 @@ function makeContainer() {
                                 <div id="char-card" class="character-card"></div>
                             </div>
                              `;
+    let extraAdd = `
+                    <div id="myModal" class="modal">
+                    
+                      <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p>Some text in the Modal..</p>
+                      </div>
+                    
+                    </div>`
 
     container.insertAdjacentHTML('afterbegin', cardToInsert);
     const restartBtn = `<button class="restart" onclick="restartGame()">Restart</button>`;
     container.insertAdjacentHTML('afterend', restartBtn);
+    container.insertAdjacentHTML('afterend', extraAdd);
 
     let backgroundMusic = document.getElementById("foobar");
     backgroundMusic.play();
+    backgroundMusic.crossOrigin = 'anonymous';
 
     startGame();
 }
@@ -69,7 +79,9 @@ function startGame() {
     let cardText = document.getElementById('text')
 
     // gets a random card
-    let card = cards[Math.floor(Math.random() * cards.length)];
+    // let card = getSituation();
+    let card = cards[Math.floor(Math.random() * cards.length)]
+
 
     let church = document.getElementById('church');
     let money = document.getElementById('money');
@@ -81,22 +93,9 @@ function startGame() {
 
     let characterCard = document.getElementById('char-card');
 
-    // let stats = [church, money, king, health];
-
     cardText.innerText = card.text;
 
     let score = document.getElementById('score');
-
-    // if (isHealthLow(stats) === false) {
-    //     option1.innerText = card.options[0].text;
-    //     option2.innerText = card.options[1].text;
-    // }
-    // else {
-    //     let answer1 = option1.innerText;
-    //     let answer2 = option2.innerText
-    //     option1.innerText = handleLowHealth(answer1);
-    //     option2.innerText = handleLowHealth(answer2);
-    // }
 
     option1.innerText = card.options[0].text;
     option2.innerText = card.options[1].text;
@@ -107,67 +106,23 @@ function startGame() {
 
     let gameOver = false;
 
-    // These two event listeners are almost duplicates of each other, sorry
     option1.addEventListener('click', function (event) {
-        if (gameOver === false) {
-            animateCard(event)
-            // removes the event listener in each round, else all hell breaks loose
-            this.removeEventListener('click', arguments.callee, false);
-            let stats = [church, money, king, health];
-            let option = card.options[0];
-            impactStats(stats, option);
+        let num = 0
 
-            // checks if the stats are below minimum or above max thresholds
-            if (isGameOver(stats) === true) {
-                gameOver = true;
-                option1.remove()
-                option2.remove()
-                cardText.innerText = chooseEnding(stats);
-                characterCard.className = 'character-card';
-                characterCard.classList.add(`gameover-card`);
-
-            }
-            else {
-                let addScore = parseInt(score.innerText) + 1;
-                score.innerText = addScore.toString();
-                setTimeout(startGame, 1000)
-            }
-        } else {
-            this.removeEventListener('click', arguments.callee, false);
-        }
-
+        event.stopImmediatePropagation();
+        optionEvent(event, gameOver, cardTheme, cardText, option1, option2, score, church, money, king, health, characterCard, card, num);
     })
+
     option2.addEventListener('click', function (event) {
-        if (gameOver === false) {
-            animateCard(event)
-            this.removeEventListener('click', arguments.callee, false);
-            let stats = [church, money, king, health];
-            let option = card.options[1];
-            impactStats(stats, option);
-            if (isGameOver(stats) === true) {
-                gameOver = true;
-                option1.remove()
-                option2.remove()
-                cardText.innerText = chooseEnding(stats);
-                characterCard.className = 'character-card';
-                characterCard.classList.add(`gameover-card`);
+        let num = 1
 
-            }
-            else {
-                let addScore = parseInt(score.innerText) + 1;
-                score.innerText = addScore.toString();
-                setTimeout(startGame, 1000)
-            }
-        } else {
-            this.removeEventListener('click', arguments.callee, false);
-        }
-
+        event.stopImmediatePropagation();
+        optionEvent(event, gameOver, cardTheme, cardText, option1, option2, score, church, money, king, health, characterCard, card, num);
     })
 }
 
 
 function restartGame() {
-    let container = document.getElementsByClassName('container');
     document.body.innerHTML = '';
     makeContainer();
 }
@@ -227,29 +182,6 @@ function isGameOver(stats) {
     }
     return gameOver
 }
-
-
-// function isHealthLow(stats) {
-//     let lowHealth = false
-//     const lowValue = 2;
-//     const healthStat = parseInt(stats[3].innerText)
-//         if (healthStat <= lowValue) {
-//             lowHealth = true
-//         }
-//     return lowHealth
-// }
-//
-//
-// function handleLowHealth(answer) {
-//     // let newAnswer = '';
-//     // for (let i=0; i < answer.length; i++) {
-//     //     newAnswer += answer[i] + answer[i].concat(Math.random().toString(36).substr(2, 1))
-//     // }
-//     // return newAnswer
-//     let randomChar = Math.random().toString(36).substr(2, 1)
-//     console.log(answer)
-//     return answer.replace(/(.{5})/g,"%1%")
-// }
 
 
 function chooseEnding(stats) {
@@ -996,19 +928,89 @@ const musicMaterial = ["/static/music/music1.mp3", "/static/music/music2.mp3", "
 
 
 
-function animateCard(ev) {
+function animateCard(ev, gameOver) {
+    ev.preventDefault()
+    ev.stopPropagation();
     let t = ev.target;
-    if (t.className === 'btn btn-left') {
+    if ((t.className === 'btn btn-left') && (gameOver !== true)) {
         document.getElementsByClassName("character-card")[0].classList.add('character-card-nope');
     }
-    if (t.className === 'btn btn-right') {
+    if ((t.className === 'btn btn-right') && (gameOver !== true)) {
         document.getElementsByClassName("character-card")[0].classList.add('character-card-yay');
     }
 }
 
-let buttons = document.getElementsByClassName("option-buttons")
-for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('click', (ev) => {
-        animateCard(ev)
-    });
+// let buttons = document.getElementsByClassName("option-buttons")
+// for (let i = 0; i < buttons.length; i++) {
+//     buttons[i].addEventListener('click', (ev) => {
+//         this.removeEventListener('click', arguments.callee, false);
+//         animateCard(ev);
+//         setTimeout(startGame, 1000)
+//     });
+// }
+
+
+function getNotSoRandomSituation() {
+    let currentIndex = cards.length, temporaryValue, randomIndex;
+
+    while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    temporaryValue = cards[currentIndex];
+    cards[currentIndex] = cards[randomIndex];
+    cards[randomIndex] = temporaryValue;
+    }
+
+    return cards;
+}
+
+let usedSituations = [];
+
+
+function getSituation() {
+    let cardsShuffled = getNotSoRandomSituation();
+    if ((cards.length !== usedSituations.length) && (usedSituations.includes(cardsShuffled[0]) !== true )) {
+        let card = cardsShuffled[0]
+        usedSituations.push(card)
+        return card
+    }
+    else if (cards.length === usedSituations.length) {
+        usedSituations = [];
+        getSituation();
+    }
+}
+
+
+
+function optionEvent(event, gameOver, cardTheme, cardText, option1, option2, score, church, money, king, health, characterCard, card, num) {
+
+
+    event.preventDefault();
+
+    this.removeEventListener('click', arguments.callee, false);
+    let stats = [church, money, king, health];
+
+    if ((isGameOver(stats) !== true) && (gameOver === false)) {
+
+      console.log(option1.innerText)
+        let addScore = parseInt(score.innerText) + 1;
+        score.innerText = addScore.toString();
+
+        let option = card.options[num];
+        impactStats(stats, option);
+        animateCard(event, gameOver);
+        setTimeout(startGame, 1000)
+        // startGame()
+    }
+
+    else {
+        gameOver = true;
+        option1.remove()
+        option2.remove()
+        cardText.innerText = chooseEnding(stats);
+        characterCard.className = 'character-card';
+        characterCard.classList.add(`gameover-card`);
+
+    }
 }
