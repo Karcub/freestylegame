@@ -25,13 +25,13 @@ startBtn.addEventListener('click', function () {
                                     <div id='money-progress'><div data-value="50" id='money'></div></div>
                                     </p>
                                 </div>
-                                <div class="stat">
+                                <li class="stat">
                                     <p>
                                     <img src="/static/images/king-stat.png" class="stat-symbol"><br />
 <!--                                    <span id="king">3</span>/10-->
                                     <div id='king-progress'><div data-value="50" id='king'></div></div>
                                     </p>
-                                </div>
+                                </li>
                                 <div class="stat">
                                     <p>
                                     <img src="/static/images/health-stat.png" class="stat-symbol"><br />
@@ -97,8 +97,9 @@ function startGame() {
     // These two event listeners are almost duplicates of each other, sorry
     option1.addEventListener('click', function (event) {
         if (gameOver === false) {
+            animateCard(event)
             // removes the event listener in each round, else all hell breaks loose
-            this.removeEventListener('click',arguments.callee,false);
+            this.removeEventListener('click', arguments.callee, false);
             let stats = [church, money, king, health];
             let option = card.options[0];
             impactStats(stats, option);
@@ -111,20 +112,19 @@ function startGame() {
                 cardText.innerText = chooseEnding(stats);
                 characterCard.className = 'character-card';
                 characterCard.classList.add(`gameover-card`);
-            }
-            else {
+            } else {
                 // loads a new card if the stats don't indicate game over
-                startGame();
+                setTimeout(startGame, 1000)
             }
-        }
-        else {
-            this.removeEventListener('click',arguments.callee,false);
+        } else {
+            this.removeEventListener('click', arguments.callee, false);
         }
 
     })
     option2.addEventListener('click', function (event) {
         if (gameOver === false) {
-            this.removeEventListener('click',arguments.callee,false);
+            animateCard(event)
+            this.removeEventListener('click', arguments.callee, false);
             let stats = [church, money, king, health];
             let option = card.options[1];
             impactStats(stats, option);
@@ -135,13 +135,11 @@ function startGame() {
                 cardText.innerText = chooseEnding(stats);
                 characterCard.className = 'character-card';
                 characterCard.classList.add(`gameover-card`);
+            } else {
+                setTimeout(startGame, 1000)
             }
-            else {
-              startGame();
-            }
-        }
-        else {
-            this.removeEventListener('click',arguments.callee,false);
+        } else {
+            this.removeEventListener('click', arguments.callee, false);
         }
 
     })
@@ -154,18 +152,16 @@ function impactStats(stats, option) {
     // adds the corresponding impact values to the stats
     for (let stat of stats) {
         for (let impact of option.impacts)
-           if (impact.impactStat === stat.id) {
-            // let stat1Value = parseInt(stat.innerText);
-            // let sum = stat1Value + parseInt(option.impactValue1);
-            // stat.innerText = sum.toString();
-            // value = sum;
-               console.log(impact.impactStat)
-               let statValue = parseInt(stat.dataset.value);
-               statValue += parseInt(impact.impactValue);
-               console.log(statValue)
+            if (impact.impactStat === stat.id) {
+                // let stat1Value = parseInt(stat.innerText);
+                // let sum = stat1Value + parseInt(option.impactValue1);
+                // stat.innerText = sum.toString();
+                // value = sum;
+                let statValue = parseInt(stat.dataset.value);
+                statValue += parseInt(impact.impactValue);
                 if (statValue >= 100) statValue = 100;
                 if (statValue <= 0) statValue = 0;
-                stat.style.width = statValue  + "%";
+                stat.style.width = statValue + "%";
             }
     }
 }
@@ -223,8 +219,7 @@ function chooseEnding(stats) {
                     return ending.options[Math.floor(Math.random() * ending.options.length)].text
                 }
             }
-        }
-        else if (parseInt(stat.innerText) >= upperLimit) {
+        } else if (parseInt(stat.innerText) >= upperLimit) {
             let threshold = 'upper';
             let gameOverStat = stat.id;
             for (let ending of endings) {
@@ -267,7 +262,7 @@ const cards = [
                         impactOperator: 'positive',
                         impactValue: 10
                     }
-                    ]
+                ]
             },
             {
                 text: 'test option text 2',
@@ -289,7 +284,7 @@ const cards = [
                         impactOperator: 'positive',
                         impactValue: 10
                     }
-                    ]
+                ]
             }
         ]
     },
@@ -318,7 +313,7 @@ const cards = [
                         impactOperator: 'negative',
                         impactValue: 10
                     }
-                    ],
+                ],
             },
             {
                 text: 'test option 4',
@@ -340,7 +335,7 @@ const cards = [
                         impactOperator: 'negative',
                         impactValue: 10
                     }
-                    ]
+                ]
             }
         ]
     },
@@ -369,7 +364,7 @@ const cards = [
                         impactOperator: 'positive',
                         impactValue: 10
                     }
-                    ]
+                ]
             },
             {
                 text: 'test option text 6',
@@ -391,11 +386,11 @@ const cards = [
                         impactOperator: 'positive',
                         impactValue: 10
                     }
-                    ]
+                ]
             }
         ]
     },
-        {
+    {
         id: 4,
         theme: 'money',
         text: 'test situation text 1 moneymoney',
@@ -420,7 +415,7 @@ const cards = [
                         impactOperator: 'negative',
                         impactValue: 10
                     }
-                    ]
+                ]
             },
             {
                 text: 'test option text 8',
@@ -442,11 +437,11 @@ const cards = [
                         impactOperator: 'positive',
                         impactValue: 10
                     }
-                    ]
+                ]
             }
         ]
     },
-        {
+    {
         id: 5,
         theme: 'health',
         text: 'test situation text 5 healthhealth',
@@ -471,7 +466,7 @@ const cards = [
                         impactOperator: 'negative',
                         impactValue: 10
                     }
-                    ]
+                ]
             },
             {
                 text: 'test option text 10',
@@ -493,11 +488,11 @@ const cards = [
                         impactOperator: 'negative',
                         impactValue: 10
                     }
-                    ]
+                ]
             }
         ]
     },
-        {
+    {
         id: 6,
         theme: 'king',
         text: 'test situation text 6 kingking',
@@ -522,7 +517,7 @@ const cards = [
                         impactOperator: 'negative',
                         impactValue: 10
                     }
-                    ]
+                ]
             },
             {
                 text: 'test option text 1022',
@@ -544,7 +539,7 @@ const cards = [
                         impactOperator: 'positive',
                         impactValue: 10
                     }
-                    ]
+                ]
             }
         ]
     },
@@ -656,3 +651,21 @@ const endings = [
         ]
     },
 ]
+
+
+function animateCard(ev) {
+    let t = ev.target;
+    if (t.className === 'btn btn-left') {
+        document.getElementsByClassName("character-card")[0].classList.add('character-card-nope');
+    }
+    if (t.className === 'btn btn-right') {
+        document.getElementsByClassName("character-card")[0].classList.add('character-card-yay');
+    }
+}
+
+let buttons = document.getElementsByClassName("option-buttons")
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', (ev) => {
+        animateCard(ev)
+    });
+}
