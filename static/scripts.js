@@ -162,9 +162,9 @@ function impactStats(stats, option) {
 
 function isGameOver(stats) {
     let gameOver = false
-    const lowerLimit = 0;
+    const lowerLimit = 10;
     // up for debate
-    const upperLimit = 100;
+    const upperLimit = 90;
     for (let stat of stats) {
         let statValue = parseInt(stat.dataset.value);
         if ((statValue <= lowerLimit) || (statValue >= upperLimit)) {
@@ -176,8 +176,8 @@ function isGameOver(stats) {
 
 
 function chooseEnding(stats) {
-    const lowerLimit = 0;
-    const upperLimit = 100;
+    const lowerLimit = 10;
+    const upperLimit = 90;
     for (let stat of stats) {
         let statValue = parseInt(stat.dataset.value);
         if (statValue <= lowerLimit) {
