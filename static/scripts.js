@@ -2,7 +2,32 @@ const startBtn = document.getElementById('start');
 
 startBtn.addEventListener('click', function () {
     startBtn.remove();
-    makeContainer();
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    container.classList.add('container');
+    let audio = musicMaterial[Math.floor(Math.random() * musicMaterial.length)];
+    let cardToInsert = `
+                            <audio id="foobar" src="${audio}" preload="auto"></audio>
+                                <div id="intro">Welcome to the middle ages! You're an average peasant with a strange hobby - 
+                            You lead an up-and-coming rock band in these strange times.
+                             <br><br>You face difficult decisions every day 
+                            regarding the cornerstones of life: <b>Money</b>, your relationship with your <b>King</b>, 
+                            and with the Holy Mother <b>Church</b> and your physical and mental <b>Health</b>. <br><br>
+                             So pick your choices carefully-- if your balance is effed up, you lose at life. 
+                             Good luck, have fun (if you can).
+                                </div>
+                          
+                             `;
+
+    container.insertAdjacentHTML('afterbegin', cardToInsert);
+    const restartBtn = `<button class="restart" onclick="restartGame()">I'm ready</button>`;
+    container.insertAdjacentHTML('afterend', restartBtn);
+
+    let backgroundMusic = document.getElementById("foobar");
+    backgroundMusic.play();
+    backgroundMusic.crossOrigin = 'anonymous';
+
+    // makeContainer();
 })
 
 
@@ -14,7 +39,7 @@ function makeContainer() {
 
     scoreContainer.classList.add('score-container');
     container.classList.add('container');
-    scoreContainer.innerHTML = `<p><span id="score">0</span> years lived</p>`
+    scoreContainer.innerHTML = `<p><span id="score">12</span> years lived</p>`
     // inserts a mock card
     let audio = musicMaterial[Math.floor(Math.random() * musicMaterial.length)];
     let cardToInsert = `
@@ -70,8 +95,17 @@ function startGame() {
     let cardText = document.getElementById('text')
 
     // gets a random card
-    // let card = getSituation();
-    let card = cards[Math.floor(Math.random() * cards.length)]
+    // let card = '';
+    // let tryCard = getSituation();
+    // if (tryCard !== 'undefined') {
+    //     card = tryCard
+    // }
+    // else {
+    //     card = cards[Math.floor(Math.random() * cards.length)]
+    // }
+    let card = getSituation();
+    // console.log(xxx)
+    // let card = cards[Math.floor(Math.random() * cards.length)]
 
 
     let church = document.getElementById('church');
@@ -96,21 +130,86 @@ function startGame() {
     characterCard.classList.add(`${cardTheme}-card`);
 
     let gameOver = false;
+    let clicked1 = false;
+    let clicked2 = false;
 
     option1.addEventListener('click', function (event) {
-        let num = 0
+        // const num = 0
+        //
+        // event.stopPropagation();
+        // optionEvent(event, gameOver, cardTheme, cardText, option1, option2, score, church, money, king, health, characterCard, card, num);
+        clicked1 = true;
+        // event.preventDefault();
+        if (clicked2 === false) {
+            this.removeEventListener('click', arguments.callee, false);
+            let stats = [church, money, king, health];
 
-        event.stopImmediatePropagation();
-        optionEvent(event, gameOver, cardTheme, cardText, option1, option2, score, church, money, king, health, characterCard, card, num);
-    })
+            if ((isGameOver(stats) !== true) && (gameOver === false)) {
+
+                let addScore = parseInt(score.innerText) + 2;
+                score.innerText = addScore.toString();
+
+                let option = card.options[0];
+                impactStats(stats, option);
+                animateCard(event, gameOver);
+                setTimeout(startGame, 1000)
+            }
+
+            else {
+                gameOver = true;
+                option1.remove()
+                option2.remove()
+                cardText.innerText = chooseEnding(stats);
+                characterCard.className = 'character-card';
+                characterCard.classList.add(`gameover-card`);
+
+            }
+            }
+        else {
+            event.stopPropagation();
+        }
+
+        })
 
     option2.addEventListener('click', function (event) {
-        let num = 1
+        // const num = 1
+        //
+        // event.stopPropagation();
+        // optionEvent(event, gameOver, cardTheme, cardText, option1, option2, score, church, money, king, health, characterCard, card, num);
+        // event.preventDefault();
+        clicked2 = true;
+        if (clicked1 === false) {
+            this.removeEventListener('click', arguments.callee, false);
+            let stats = [church, money, king, health];
 
-        event.stopImmediatePropagation();
-        optionEvent(event, gameOver, cardTheme, cardText, option1, option2, score, church, money, king, health, characterCard, card, num);
-    })
-}
+            if ((isGameOver(stats) !== true) && (gameOver === false)) {
+
+                let addScore = parseInt(score.innerText) + 2;
+                score.innerText = addScore.toString();
+
+                let option = card.options[1];
+                impactStats(stats, option);
+                animateCard(event, gameOver);
+                setTimeout(startGame, 1000)
+                // startGame()
+            }
+
+            else {
+                gameOver = true;
+                option1.remove()
+                option2.remove()
+                cardText.innerText = chooseEnding(stats);
+                characterCard.className = 'character-card';
+                characterCard.classList.add(`gameover-card`);
+
+            }
+        }
+        else {
+            event.stopPropagation()
+        }
+
+        })
+    }
 
 
 function restartGame() {
@@ -162,9 +261,9 @@ function impactStats(stats, option) {
 
 function isGameOver(stats) {
     let gameOver = false
-    const lowerLimit = 10;
+    const lowerLimit = 0;
     // up for debate
-    const upperLimit = 90;
+    const upperLimit = 100;
     for (let stat of stats) {
         let statValue = parseInt(stat.dataset.value);
         if ((statValue <= lowerLimit) || (statValue >= upperLimit)) {
@@ -176,8 +275,8 @@ function isGameOver(stats) {
 
 
 function chooseEnding(stats) {
-    const lowerLimit = 10;
-    const upperLimit = 90;
+    const lowerLimit = 0;
+    const upperLimit = 100;
     for (let stat of stats) {
         let statValue = parseInt(stat.dataset.value);
         if (statValue <= lowerLimit) {
@@ -432,7 +531,7 @@ const cards = [
     },
     {
         theme: 'king',
-        text: "The king is in your village for a visit. Everyone is excited and wants to throw a celebration.\n",
+        text: "The king is in your village for a visit. Everyone is excited and wants to throw a celebration.",
         options: [
             {
                 text: 'Join and contribute, celebrate you king! ',
@@ -664,7 +763,7 @@ const cards = [
     },
     {
         theme: 'money',
-        text: "Your dried salted meat supplies are decreasing.\n",
+        text: "Your dried salted meat supplies are decreasing.",
         options: [
             {
                 text: 'Convert to veganism',
@@ -699,7 +798,7 @@ const cards = [
         ]
     },
     {
-        theme: 'user',
+        theme: 'money',
         text: "Your daughter shows you her mathematics skills.",
         options: [
             {
@@ -730,7 +829,7 @@ const cards = [
         ]
     },
     {
-        theme: 'user',
+        theme: 'health',
         text: "Your private parts are burning after a mysterious night out.",
         options: [
             {
@@ -745,6 +844,11 @@ const cards = [
                         impactStat: 'money',
                         impactOperator: 'negative',
                         impactValue: 20
+                    },
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 10
                     }
                 ]
             },
@@ -763,8 +867,8 @@ const cards = [
                     },
                     {
                         impactStat: 'money',
-                        impactOperator: 'negative',
-                        impactValue: 20
+                        impactOperator: 'positive',
+                        impactValue: 10
                     }
                 ]
             }
@@ -801,6 +905,484 @@ const cards = [
             }
         ]
     },
+    {
+        theme: 'user',
+        text: "Your bandmates think that lately you spend too much time in the church for your own good.",
+        options: [
+            {
+                text: 'Leave the heathens and reserve a confession appointment',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            },
+            {
+                text: 'Have an ale in the tavern',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'church',
+        text: "My son, all your songs are about those lewd nymphs ans satyrs.",
+        options: [
+            {
+                text: "Start writing the epic of Zeus's lovelife",
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 20
+                    }
+                ]
+            },
+            {
+                text: 'Promise to read the Bible for inspiration in the future',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'money',
+        text: "Your daughter is already at the ripe age of 12. She wants to marry the neighbouring farmer's son.",
+        options: [
+            {
+                text: 'Let her then',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            },
+            {
+                text: "And who's gonna pay for the dowry?!",
+                impacts: [
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'king',
+        text: "Your band's vocalist says he saw the princess showing her ankle at the last feast.",
+        options: [
+            {
+                text: "Produce a painting of it or I shan't believe!",
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'negative',
+                        impactValue: 10
+                    }
+                ]
+            },
+            {
+                text: 'Tell on her to the king',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'user',
+        text: "The vikings are already on the shores! They are raiding the land",
+        options: [
+            {
+                text: 'Start praying and hope for the best',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'negative',
+                        impactValue: 30
+                    }
+                ]
+            },
+            {
+                text: 'Leave your wife as bait and flee',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 30
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'king',
+        text: "The plague has killed your local tax collector.",
+        options: [
+            {
+                text: "Take what's left in his house",
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 10
+                    },
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            },
+            {
+                text: 'Report to your superiors',
+                impacts: [
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'positive',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'king',
+        text: "There is a drinking competition on the king's birthday feast. You are close to winning, but is there suddenly three of the queen?...",
+        options: [
+            {
+                text: 'Ha%2ve an()th3er jug!',
+                impacts: [
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'positive',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            },
+            {
+                text: 'I think I had enough',
+                impacts: [
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'user',
+        text: "You are having strange dreams about something like flammable black powder.",
+        options: [
+            {
+                text: 'Write a thesis for the court',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 20
+                    },
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    }
+                ]
+            },
+            {
+                text: "Flammable powder? What's next, flying in the sky?!",
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'user',
+        text: "It's time for your monthly shower in the rain",
+        options: [
+            {
+                text: 'Put on more perfume',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            },
+            {
+                text: 'Alright, alright endure it',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'user',
+        text: "There must be a better way of measuring time other than looking at the sun all the time!",
+        options: [
+            {
+                text: 'Dismiss these pagan thoughts ',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            },
+            {
+                text: 'Write down your theories',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'user',
+        text: "Your wife thinks it's time for another baby.",
+        options: [
+            {
+                text: 'Accidentally go on a pilgrimage the next morning',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    }
+                ]
+            },
+            {
+                text: "Why not, one out of then isn't a good ratio anyways",
+                impacts: [
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 10
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'king',
+        text: "Your king is having thoughts of letting women be thought in schools. He asks your opinion.",
+        options: [
+            {
+                text: 'Play it as a joke and quickly inform the archbishop',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'positive',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'negative',
+                        impactValue: 10
+                    }
+                ]
+            },
+            {
+                text: 'Who knows? There could be worse things',
+                impacts: [
+                    {
+                        impactStat: 'church',
+                        impactOperator: 'negative',
+                        impactValue: 10,
+                    },
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'positive',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        theme: 'king',
+        text: "A foreign ambassador wants you to spy on the kingdom.",
+        options: [
+            {
+                text: 'Tell him all you know',
+                impacts: [
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'negative',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'positive',
+                        impactValue: 20
+                    }
+                ]
+            },
+            {
+                text: 'Be loyal for once in your life',
+                impacts: [
+                    {
+                        impactStat: 'king',
+                        impactOperator: 'positive',
+                        impactValue: 20,
+                    },
+                    {
+                        impactStat: 'money',
+                        impactOperator: 'negative',
+                        impactValue: 20
+                    }
+                ]
+            }
+        ]
+    },
 
 ]
 
@@ -814,7 +1396,7 @@ const endings = [
                     'so you have been declared a heretic.',
             },
             {
-                text: 'Your rebellious attitude reached the ears of the archbishop. The church has excommunicated you.',
+                text: 'Your rebellious attitude reached the ears of the archbishop. The church has excommunicated you.'
             }
         ]
     },
@@ -827,7 +1409,7 @@ const endings = [
                     'He would rather test his cool new torture equipments from the far East on you.',
             },
             {
-                text: 'king loweraaaaaa',
+                text: "The king just couldn't bear to look at your stupid mustache for an additional minute, so he exiled you and your family."
             }
         ]
     },
@@ -836,10 +1418,11 @@ const endings = [
         threshold: 'lower',
         options: [
             {
-                text: 'Because of your neglected hygiene, you were among the first victims of the plague.',
+                text: 'Because of your neglected hygiene, you were among the first victims of the plague. At least you were the first in something,' +
+                    'that counts too right?',
             },
             {
-                text: 'health lowereeeeeeeeee',
+                text: "Well you died, that's for sure. Honestly though, what did you expect with such lifestyle?"
             }
         ]
     },
@@ -852,7 +1435,7 @@ const endings = [
             },
             {
                 text: "Your wife couldn't put up with poverty anymore, " +
-                    "so she grabbed everything that could be moved and went back to her parents.",
+                    "so she grabbed everything that could be moved and went back to her parents."
             }
         ]
     },
@@ -866,7 +1449,7 @@ const endings = [
             },
             {
                 text: "Seeing the archbishop's special treatment of you, your fellow musicians wanted to teach you a lesson." +
-                    "While running away, you slipped and died on the spot.",
+                    "While running away, you slipped and died on the spot."
             }
         ]
     },
@@ -880,7 +1463,7 @@ const endings = [
             },
             {
                 text: "Your relationship with the king -and his queen is truly just too good." +
-                    " The king caught the two of you in the act and the queen pushed all the blame to you. You were hanged the next morning.",
+                    " The king caught the two of you in the act and the queen pushed all the blame to you. You were hanged the next morning."
             }
         ]
     },
@@ -893,7 +1476,8 @@ const endings = [
                     ' The gossip reached the church and they called a witch-hunt on you.',
             },
             {
-                text: 'health upperccccccccccccccc',
+                text: '"I knew it was a bad idea to bathe every day..." - ' +
+                    'you said said with your last breath as you died from being too healthy (how is that even possible?)'
             }
         ]
     },
@@ -906,7 +1490,7 @@ const endings = [
             },
             {
                 text: "Your eldest son couldn't wait for your death to get his inheritance, " +
-                    "so he decided to take action a bit earlier and poisoned you.",
+                    "so he decided to take action a bit earlier and poisoned you."
             }
         ]
     },
@@ -952,8 +1536,8 @@ function getNotSoRandomSituation() {
     cards[currentIndex] = cards[randomIndex];
     cards[randomIndex] = temporaryValue;
     }
-
     return cards;
+
 }
 
 let usedSituations = [];
@@ -961,14 +1545,18 @@ let usedSituations = [];
 
 function getSituation() {
     let cardsShuffled = getNotSoRandomSituation();
-    if ((cards.length !== usedSituations.length) && (usedSituations.includes(cardsShuffled[0]) !== true )) {
-        let card = cardsShuffled[0]
+    let card = cardsShuffled[0]
+    console.log(usedSituations)
+    if ((cardsShuffled.length > usedSituations.length) && (usedSituations.includes(card) !== true )) {
         usedSituations.push(card)
         return card
     }
     else if (cards.length === usedSituations.length) {
         usedSituations = [];
         getSituation();
+    }
+    else {
+        return card
     }
 }
 
@@ -984,11 +1572,11 @@ function optionEvent(event, gameOver, cardTheme, cardText, option1, option2, sco
 
     if ((isGameOver(stats) !== true) && (gameOver === false)) {
 
-      console.log(option1.innerText)
-        let addScore = parseInt(score.innerText) + 1;
+        let addScore = parseInt(score.innerText) + 2;
         score.innerText = addScore.toString();
 
         let option = card.options[num];
+        console.log(option)
         impactStats(stats, option);
         animateCard(event, gameOver);
         setTimeout(startGame, 1000)
@@ -1000,6 +1588,8 @@ function optionEvent(event, gameOver, cardTheme, cardText, option1, option2, sco
         option1.remove()
         option2.remove()
         cardText.innerText = chooseEnding(stats);
+        cardText.innerText.style.fontSize = "x-large";
+        cardText.innerText.style.color = '#ff0000';
         characterCard.className = 'character-card';
         characterCard.classList.add(`gameover-card`);
 

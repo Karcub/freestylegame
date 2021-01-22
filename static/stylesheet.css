@@ -29,7 +29,7 @@ body {
 
 .container {
     width: 450px;
-    height: 500px;
+    height: 540px;
     max-width: 80%;
     background-color: #586C82;
     padding-left: 10px;
@@ -45,6 +45,15 @@ body {
 #text {
     text-align: center;
     color: white;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 20px;
+}
+
+#intro {
+    text-align: center;
+    color: white;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 27px;
 }
 
 .btn-right {
@@ -90,7 +99,8 @@ body {
 }
 
 .animated-word {
-    font-family: "Roboto", serif;
+    font-family: MedievalSharp, serif;
+    /*font-style: normal; font-variant: normal;*/
     letter-spacing: 0.4em;
     font-weight: 600;
     font-size: 100px;
@@ -118,9 +128,10 @@ button:hover {
 button {
     border-radius: 8px;
     font-family: Roboto, sans-serif;
-    font-weight: bold;
+    /*font-weight: bold;*/
     background-color: #545c68;
     color: white;
+    font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400;
 
 }
 
@@ -220,12 +231,23 @@ button {
     top: 0%;
     left: 47%;
     color: white;
+    font-size: 20px;
+    font-style: oblique;
+    font-family: MedievalSharp, serif;
+}
+
+#score {
+    font-family: MedievalSharp, serif;
 }
 
 .restart {
     position: fixed;
-    bottom: 3%;
+    bottom: 1%;
     left: 47%;
+    font-size: 21px;
+    font-weight: bold;
+    font-style: normal;
+    font-family: MedievalSharp, serif;
 }
 
 #foobar {
