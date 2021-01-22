@@ -5,7 +5,7 @@ startBtn.addEventListener('click', function () {
     const container = document.createElement('div');
     document.body.appendChild(container);
     container.classList.add('container');
-    let audio = musicMaterial[Math.floor(Math.random() * musicMaterial.length)];
+    let audio = randomizeMusic();
     let cardToInsert = `
                             <audio id="foobar" src="${audio}" preload="auto"></audio>
                                 <div id="intro">Welcome to the middle ages! You're an average peasant with a strange hobby - 
@@ -162,6 +162,9 @@ function startGame() {
                 cardText.innerText = chooseEnding(stats);
                 characterCard.className = 'character-card';
                 characterCard.classList.add(`gameover-card`);
+                cardText.style.color = '#ffb3b3';
+                cardText.style.fontWeight = "900";
+                cardText.style.fontSize = "x-large";
 
             }
             }
@@ -201,6 +204,9 @@ function startGame() {
                 cardText.innerText = chooseEnding(stats);
                 characterCard.className = 'character-card';
                 characterCard.classList.add(`gameover-card`);
+                cardText.style.color = '#ffb3b3';
+                cardText.style.fontWeight = "900"
+                cardText.style.fontSize = "x-large";
 
             }
         }
@@ -322,7 +328,7 @@ const cards = [
                     {
                         impactStat: 'money',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             },
@@ -332,7 +338,7 @@ const cards = [
                     {
                         impactStat: 'church',
                         impactOperator: 'positive',
-                        impactValue: 10,
+                        impactValue: 20,
                     }
                 ]
             }
@@ -353,7 +359,7 @@ const cards = [
                     {
                         impactStat: 'health',
                         impactOperator: 'positive',
-                        impactValue: 10,
+                        impactValue: 20,
                     }
                 ],
             },
@@ -363,12 +369,12 @@ const cards = [
                     {
                         impactStat: 'church',
                         impactOperator: 'positive',
-                        impactValue: 20,
+                        impactValue: 30,
                     },
                     {
                         impactStat: 'health',
                         impactOperator: 'negative',
-                        impactValue: 10,
+                        impactValue: 20,
                     }
                 ]
             }
@@ -389,7 +395,7 @@ const cards = [
                     {
                         impactStat: 'king',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             },
@@ -421,7 +427,12 @@ const cards = [
                         impactStat: 'church',
                         impactOperator: 'negative',
                         impactValue: 20,
-                    }
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 20,
+                    },
                 ]
             },
             {
@@ -431,7 +442,12 @@ const cards = [
                         impactStat: 'church',
                         impactOperator: 'positive',
                         impactValue: 20,
-                    }
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'negative',
+                        impactValue: 20,
+                    },
                 ]
             }
         ]
@@ -447,22 +463,22 @@ const cards = [
                     {
                         impactStat: 'church',
                         impactOperator: 'positive',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'health',
                         impactOperator: 'negative',
-                        impactValue: 10
+                        impactValue: 20
                     },
                     {
                         impactStat: 'health',
                         impactOperator: 'negative',
-                        impactValue: 10
+                        impactValue: 20
                     },
                     {
                         impactStat: 'money',
                         impactOperator: 'negative',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             },
@@ -472,22 +488,22 @@ const cards = [
                     {
                         impactStat: 'church',
                         impactOperator: 'negative',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'health',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     },
                     {
                         impactStat: 'king',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     },
                     {
                         impactStat: 'king',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             }
@@ -503,12 +519,12 @@ const cards = [
                     {
                         impactStat: 'money',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     },
                     {
                         impactStat: 'health',
                         impactOperator: 'negative',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             },
@@ -518,12 +534,12 @@ const cards = [
                     {
                         impactStat: 'money',
                         impactOperator: 'negative',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'health',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             }
@@ -539,12 +555,12 @@ const cards = [
                     {
                         impactStat: 'money',
                         impactOperator: 'negative',
-                        impactValue: 10
+                        impactValue: 20
                     },
                     {
                         impactStat: 'king',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             },
@@ -554,12 +570,12 @@ const cards = [
                     {
                         impactStat: 'health',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     },
                     {
                         impactStat: 'king',
                         impactOperator: 'negative',
-                        impactValue: 20
+                        impactValue: 30
                     }
                 ]
             }
@@ -580,7 +596,7 @@ const cards = [
                     {
                         impactStat: 'money',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     },
                     {
                         impactStat: 'king',
@@ -595,7 +611,7 @@ const cards = [
                     {
                         impactStat: 'king',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             }
@@ -611,12 +627,12 @@ const cards = [
                     {
                         impactStat: 'church',
                         impactOperator: 'negative',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'money',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 30
                     }
                 ]
             },
@@ -626,12 +642,12 @@ const cards = [
                     {
                         impactStat: 'church',
                         impactOperator: 'positive',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'money',
                         impactOperator: 'negative',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             }
@@ -679,22 +695,22 @@ const cards = [
                     {
                         impactStat: 'church',
                         impactOperator: 'positive',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'money',
                         impactOperator: 'negative',
-                        impactValue: 10
+                        impactValue: 20
                     },
                     {
                         impactStat: 'health',
                         impactOperator: 'negative',
-                        impactValue: 10
+                        impactValue: 20
                     },
                     {
                         impactStat: 'king',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             },
@@ -704,22 +720,22 @@ const cards = [
                     {
                         impactStat: 'church',
                         impactOperator: 'negative',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'health',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     },
                     {
                         impactStat: 'money',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     },
                     {
                         impactStat: 'king',
                         impactOperator: 'negative',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             }
@@ -735,12 +751,12 @@ const cards = [
                     {
                         impactStat: 'health',
                         impactOperator: 'positive',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'money',
                         impactOperator: 'negative',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             },
@@ -750,12 +766,12 @@ const cards = [
                     {
                         impactStat: 'church',
                         impactOperator: 'positive',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'health',
                         impactOperator: 'negative',
-                        impactValue: 10
+                        impactValue: 30
                     }
                 ]
             }
@@ -771,12 +787,12 @@ const cards = [
                     {
                         impactStat: 'money',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     },
                     {
                         impactStat: 'health',
                         impactOperator: 'negative',
-                        impactValue: 20
+                        impactValue: 30
                     }
                 ]
             },
@@ -808,6 +824,11 @@ const cards = [
                         impactStat: 'money',
                         impactOperator: 'negative',
                         impactValue: 20
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'positive',
+                        impactValue: 10
                     }
                 ]
             },
@@ -823,6 +844,11 @@ const cards = [
                         impactStat: 'money',
                         impactOperator: 'positive',
                         impactValue: 20
+                    },
+                    {
+                        impactStat: 'health',
+                        impactOperator: 'negative',
+                        impactValue: 10
                     }
                 ]
             }
@@ -838,7 +864,7 @@ const cards = [
                     {
                         impactStat: 'health',
                         impactOperator: 'positive',
-                        impactValue: 10,
+                        impactValue: 30,
                     },
                     {
                         impactStat: 'money',
@@ -863,7 +889,7 @@ const cards = [
                     {
                         impactStat: 'health',
                         impactOperator: 'negative',
-                        impactValue: 20
+                        impactValue: 30
                     },
                     {
                         impactStat: 'money',
@@ -992,7 +1018,7 @@ const cards = [
                     {
                         impactStat: 'money',
                         impactOperator: 'negative',
-                        impactValue: 20
+                        impactValue: 30
                     }
                 ]
             },
@@ -1002,7 +1028,7 @@ const cards = [
                     {
                         impactStat: 'money',
                         impactOperator: 'positive',
-                        impactValue: 20
+                        impactValue: 30
                     }
                 ]
             }
@@ -1018,12 +1044,12 @@ const cards = [
                     {
                         impactStat: 'church',
                         impactOperator: 'negative',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'king',
                         impactOperator: 'negative',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             },
@@ -1033,12 +1059,12 @@ const cards = [
                     {
                         impactStat: 'church',
                         impactOperator: 'positive',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'king',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             }
@@ -1094,8 +1120,8 @@ const cards = [
                     },
                     {
                         impactStat: 'money',
-                        impactOperator: 'negative',
-                        impactValue: 10
+                        impactOperator: 'positive',
+                        impactValue: 30
                     },
                     {
                         impactStat: 'king',
@@ -1131,7 +1157,7 @@ const cards = [
                     {
                         impactStat: 'king',
                         impactOperator: 'positive',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'health',
@@ -1146,7 +1172,7 @@ const cards = [
                     {
                         impactStat: 'king',
                         impactOperator: 'negative',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'health',
@@ -1187,7 +1213,7 @@ const cards = [
                     {
                         impactStat: 'church',
                         impactOperator: 'positive',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'money',
@@ -1280,7 +1306,7 @@ const cards = [
                     {
                         impactStat: 'church',
                         impactOperator: 'positive',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'money',
@@ -1290,7 +1316,7 @@ const cards = [
                     {
                         impactStat: 'health',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             },
@@ -1300,12 +1326,12 @@ const cards = [
                     {
                         impactStat: 'money',
                         impactOperator: 'negative',
-                        impactValue: 10,
+                        impactValue: 20,
                     },
                     {
                         impactStat: 'health',
                         impactOperator: 'positive',
-                        impactValue: 10
+                        impactValue: 20
                     }
                 ]
             }
@@ -1331,7 +1357,7 @@ const cards = [
                 ]
             },
             {
-                text: 'Who knows? There could be worse things',
+                text: 'Well who knows? There could be worse things',
                 impacts: [
                     {
                         impactStat: 'church',
@@ -1409,7 +1435,7 @@ const endings = [
                     'He would rather test his cool new torture equipments from the far East on you.',
             },
             {
-                text: "The king just couldn't bear to look at your stupid mustache for an additional minute, so he exiled you and your family."
+                text: "The king just couldn't bear to look at your stupid mustache for an additional minute, so he exiled you and your family to the desert."
             }
         ]
     },
@@ -1449,7 +1475,7 @@ const endings = [
             },
             {
                 text: "Seeing the archbishop's special treatment of you, your fellow musicians wanted to teach you a lesson." +
-                    "While running away, you slipped and died on the spot."
+                    "While running from them, you slipped in the chamberpot and left this world not so elegantly."
             }
         ]
     },
@@ -1477,7 +1503,7 @@ const endings = [
             },
             {
                 text: '"I knew it was a bad idea to bathe every day..." - ' +
-                    'you said said with your last breath as you died from being too healthy (how is that even possible?)'
+                    'you said with your last breath as you died from being too healthy (how is that even possible?)'
             }
         ]
     },
@@ -1486,7 +1512,8 @@ const endings = [
         threshold: 'upper',
         options: [
             {
-                text: 'You accumulated a lot of riches over time, so the king decided to "liberate" your from all your assets.',
+                text: "You accumulated a lot of riches over time. The kingdom's treasury is pretty empty these days," +
+                    " so the king decided to 'liberate' you from all your assets.",
             },
             {
                 text: "Your eldest son couldn't wait for your death to get his inheritance, " +
@@ -1497,9 +1524,9 @@ const endings = [
 ]
 
 
-const musicMaterial = ["/static/music/music1.mp3", "/static/music/music2.mp3", "/static/music/music3.mp3", "/static/music/music4.mp3",
-                        "/static/music/music5.mp3", "/static/music/music6.mp3", "/static/music/music7.mp3", "/static/music/music8.mp3",
-                        "/static/music/music9.mp3", "/static/music/music10.mp3", "/static/music/music11.mp3", "/static/music/music12.mp3"]
+const musicMaterial = ["/static/music/music1.mp3", "/static/music/music3.mp3", "/static/music/music4.mp3",
+                        "/static/music/music5.mp3", "/static/music/music6.mp3", "/static/music/music7.mp3",
+                        "/static/music/music10.mp3", "/static/music/music11.mp3", "/static/music/music12.mp3"]
 
 
 
@@ -1557,6 +1584,25 @@ function getSituation() {
     }
     else {
         return card
+    }
+}
+
+let usedMusic = [];
+
+function randomizeMusic() {
+    // let cardsShuffled = getNotSoRandomSituation();
+    let music = musicMaterial[0]
+    // console.log(usedSituations)
+    if ((musicMaterial.length > usedMusic.length) && (usedMusic.includes(music) !== true )) {
+        usedMusic.push(music)
+        return music
+    }
+    else if (musicMaterial.length === usedMusic.length) {
+        usedMusic = [];
+        randomizeMusic();
+    }
+    else {
+        return music
     }
 }
 
